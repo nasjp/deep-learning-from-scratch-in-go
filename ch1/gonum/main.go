@@ -24,9 +24,9 @@ func array() {
 	x := mat.NewVecDense(3, []float64{1.0, 2.0, 3.0})
 	matPrint(x)
 	/*
-	  ⎡1⎤
-	  ⎢2⎥
-	  ⎣3⎦
+		⎡1⎤
+		⎢2⎥
+		⎣3⎦
 	*/
 	fmt.Printf("x type: %T\n", x)
 	// x type: *mat.VecDense
@@ -130,16 +130,16 @@ func dimensionArray() {
 	x := mat.NewDense(2, 2, nil)
 	matPrint(x)
 	/*
-	  ⎡0  0⎤
-	  ⎣0  0⎦
+		⎡0  0⎤
+		⎣0  0⎦
 	*/
 
 	// 和
 	x.Add(a, b)
 	matPrint(x)
 	/*
-	  ⎡4   2⎤
-	  ⎣3  10⎦
+		⎡4   2⎤
+		⎣3  10⎦
 	*/
 	x.Reset()
 
@@ -173,7 +173,10 @@ func broadcast() {
 	*/
 	b := mat.NewDense(1, 2, []float64{10, 20})
 	matPrint(b)
-	// [10  20]
+	/*
+		[10  20]
+	*/
+
 	// こうするしかない
 	bb := &mat.Dense{}
 	bb.Stack(b, b)
@@ -220,19 +223,19 @@ func accessToElem() {
 	v := denseFlatten(x)
 	matPrint(v)
 	/*
-	  ⎡51⎤
-	  ⎢55⎥
-	  ⎢14⎥
-	  ⎢19⎥
-	  ⎢ 0⎥
-	  ⎣ 4⎦
+		⎡51⎤
+		⎢55⎥
+		⎢14⎥
+		⎢19⎥
+		⎢ 0⎥
+		⎣ 4⎦
 	*/
 
 	matPrint(mat.NewVecDense(3, []float64{v.AtVec(0), v.AtVec(2), v.AtVec(4)}))
 	/*
-	  ⎡51⎤
-	  ⎢14⎥
-	  ⎣ 0⎦
+		⎡51⎤
+		⎢14⎥
+		⎣ 0⎦
 	*/
 
 	// リスト内包表記的なことはできないのでfunction を定義
