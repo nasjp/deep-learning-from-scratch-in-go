@@ -179,11 +179,17 @@ func accessToElem() {
 
 	matPrint(x)
 	/*
+		⎡51  55⎤
+		⎢14  19⎥
+		⎣ 0   4⎦
+	*/
+
+	matPrint(x.RowView(0))
+	/*
 		⎡51⎤
 		⎣55⎦
 	*/
 
-	matPrint(x.RowView(0))
 	fmt.Println(x.At(0, 1))
 	// 55
 
@@ -217,13 +223,13 @@ func accessToElem() {
 
 func denseFlatten(x *mat.Dense) *mat.VecDense {
 	r, c := x.Dims()
-	a := mat.NewVecDense(r*c, nil)
+	data := make([]float64, 0, r*c)
 	for ri := 0; ri < r; ri++ {
 		for ci := 0; ci < c; ci++ {
-			a.SetVec(ri*c+ci, x.At(ri, ci))
+			data = append(data, x.At(ri, ci))
 		}
 	}
-	return a
+	return mat.NewVecDense(len(data), data)
 }
 
 func over(x *mat.VecDense, n float64) *mat.VecDense {
