@@ -24,9 +24,9 @@ func array() {
 	x := mat.NewVecDense(3, []float64{1.0, 2.0, 3.0})
 	matPrint(x)
 	/*
-	 ⎡1⎤
-	 ⎢2⎥
-	 ⎣3⎦
+	  ⎡1⎤
+	  ⎢2⎥
+	  ⎣3⎦
 	*/
 	fmt.Printf("x type: %T\n", x)
 	// x type: *mat.VecDense
@@ -50,7 +50,7 @@ func calculate() {
 		⎣6⎦
 	*/
 
-	// 空行列の生成
+	// 空配列の生成
 	a := mat.NewVecDense(3, nil)
 	matPrint(a)
 	/*
@@ -101,23 +101,45 @@ func calculate() {
 
 func dimensionArray() {
 	// gonum のN次元配列
-	a := mat.NewDense(2, 2, []float64{1, 2, 3, 4})
+	a := mat.NewDense(2, 2, []float64{
+		1, 2,
+		3, 4,
+	})
 	matPrint(a)
+	/*
+		⎡1  2⎤
+		⎣3  4⎦
+	*/
 
 	// 行列の形を取得
 	r, c := a.Dims()
 	fmt.Printf("(%d, %d)\n", r, c)
 	// (2, 2)
-	b := mat.NewDense(2, 2, []float64{3, 0, 0, 6})
 
-	x := &mat.Dense{}
+	b := mat.NewDense(2, 2, []float64{
+		3, 0,
+		0, 6,
+	})
+	matPrint(b)
+	/*
+		⎡3  0⎤
+		⎣0  6⎦
+	*/
+
+	// 空行列の生成
+	x := mat.NewDense(2, 2, nil)
+	matPrint(x)
+	/*
+	  ⎡0  0⎤
+	  ⎣0  0⎦
+	*/
 
 	// 和
 	x.Add(a, b)
 	matPrint(x)
 	/*
-	   ⎡4   2⎤
-	   ⎣3  10⎦
+	  ⎡4   2⎤
+	  ⎣3  10⎦
 	*/
 	x.Reset()
 
@@ -190,6 +212,7 @@ func accessToElem() {
 		⎣55⎦
 	*/
 
+	// 要素へのアクセス
 	fmt.Println(x.At(0, 1))
 	// 55
 
@@ -197,12 +220,12 @@ func accessToElem() {
 	v := denseFlatten(x)
 	matPrint(v)
 	/*
-	   ⎡51⎤
-	   ⎢55⎥
-	   ⎢14⎥
-	   ⎢19⎥
-	   ⎢ 0⎥
-	   ⎣ 4⎦
+	  ⎡51⎤
+	  ⎢55⎥
+	  ⎢14⎥
+	  ⎢19⎥
+	  ⎢ 0⎥
+	  ⎣ 4⎦
 	*/
 
 	matPrint(mat.NewVecDense(3, []float64{v.AtVec(0), v.AtVec(2), v.AtVec(4)}))
