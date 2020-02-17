@@ -79,7 +79,7 @@ func calculate() {
 	*/
 	a.Reset()
 
-	// 積
+	// 乗
 	a.MulElemVec(x, y)
 	matPrint(a)
 	/*
@@ -89,7 +89,7 @@ func calculate() {
 	*/
 	a.Reset()
 
-	// 割
+	// 除
 	a.DivElemVec(x, y)
 	matPrint(a)
 	/*
@@ -121,7 +121,7 @@ func dimensionArray() {
 	*/
 	x.Reset()
 
-	// 積(要素ごと)
+	// 乗(要素ごと)
 	x.MulElem(a, b)
 	matPrint(x)
 	/*
