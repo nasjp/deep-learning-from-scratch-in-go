@@ -23,7 +23,7 @@ func PlotData(p *plot.Plot, x, y []float64, leg string) {
 		log.Fatal(err)
 	}
 
-	if err := plotutil.AddLinePoints(p, leg, data); err != nil {
+	if err := plotutil.AddLines(p, leg, data); err != nil {
 		log.Fatal(err)
 	}
 }
