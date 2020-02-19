@@ -17,7 +17,7 @@ func main() {
 		log.Fatal(err)
 	}
 	tools.PlotData(p, x.RawVector().Data, y.RawVector().Data, "step")
-	p.Save(10*vg.Inch, 6*vg.Inch, "step.png")
+	p.Save(10*vg.Inch, 6*vg.Inch, "step_function.png")
 }
 
 func step(x1 *mat.VecDense) *mat.VecDense {
