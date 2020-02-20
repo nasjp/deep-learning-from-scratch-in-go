@@ -11,6 +11,11 @@ import (
 )
 
 func main() {
+	stepAndSigmoid()
+	showReLU()
+}
+
+func stepAndSigmoid() {
 	p, err := plot.New()
 	if err != nil {
 		log.Fatal(err)
@@ -19,13 +24,30 @@ func main() {
 	x := tools.NewVecDenseRange(-5.0, 5.0, 0.1)
 	g := &tools.Graph{
 		P: p,
-		Functions: []tools.Function{
+		Functions: []*tools.Function{
 			{X: x.RawVector().Data, Y: step(x).RawVector().Data, Legend: "step"},
 			{X: x.RawVector().Data, Y: sigmoid(x).RawVector().Data, Legend: "sigmoid"},
 		},
 	}
 	g.Draw()
-	p.Save(10*vg.Inch, 6*vg.Inch, "activation_function.png")
+	p.Save(8*vg.Inch, 6*vg.Inch, "activation_function.png")
+}
+
+func showReLU() {
+	p, err := plot.New()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	x := tools.NewVecDenseRange(-5.0, 5.0, 0.1)
+	g := &tools.Graph{
+		P: p,
+		Functions: []*tools.Function{
+			{X: x.RawVector().Data, Y: relu(x).RawVector().Data, Legend: "relu"},
+		},
+	}
+	g.Draw()
+	p.Save(8*vg.Inch, 6*vg.Inch, "relu_function.png")
 }
 
 func step(x1 *mat.VecDense) *mat.VecDense {
@@ -48,6 +70,20 @@ func step(x1 *mat.VecDense) *mat.VecDense {
 func sigmoid(x1 *mat.VecDense) *mat.VecDense {
 	f := func(x float64) float64 {
 		return 1 / (1 + math.Exp(-x))
+	}
+
+	v := mat.NewVecDense(x1.Len(), nil)
+
+	for i := 0; i < x1.Len(); i++ {
+		v.SetVec(i, f(x1.AtVec(i)))
+	}
+
+	return v
+}
+
+func relu(x1 *mat.VecDense) *mat.VecDense {
+	f := func(x float64) float64 {
+		return math.Max(0, x)
 	}
 
 	v := mat.NewVecDense(x1.Len(), nil)

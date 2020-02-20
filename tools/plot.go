@@ -10,7 +10,7 @@ import (
 
 type Graph struct {
 	P         *plot.Plot
-	Functions []Function
+	Functions []*Function
 }
 
 type Function struct {
